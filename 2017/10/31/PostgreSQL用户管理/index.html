@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="生活得有意思">
+    
+
+    <!--Author-->
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="PostgreSQL用户管理"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Pulp Fiction"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>PostgreSQL用户管理 - Pulp Fiction</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/sass/main.css">
+
+    <!--[if lt IE 8]>
+        <script src="/js/ie/html5shiv.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+        <link rel="stylesheet" href="/sass/ie8.css">
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" href="/sass/ie9.css">
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Menu -->
+        <!-- Header -->
+<header id="header">
+    <div class="inner">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <span class="symbol"><img src="/images/avatar.jpeg" alt="" /></span><span class="title">Pulp Fiction</span>
+        </a>
+
+        <!-- Nav -->
+        <nav>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+        
+            <li>
+                <a href="/">Home</a>
+            </li>
+        
+            <li>
+                <a href="/archives">Archives</a>
+            </li>
+        
+    </ul>
+</nav>
+
+
+        <div id="main">
+            <div class="inner">
+
+                <!-- Main Content -->
+                
+
+    <h1>PostgreSQL用户管理</h1>
+
+
+    <span class="image main"><img src="/assets/p739524568.jpg" alt="" /></span>
+
+
+<!-- Gallery -->
+
+
+<!-- Content -->
+<h1 id="角色与用户的区别"><a href="#角色与用户的区别" class="headerlink" title="角色与用户的区别"></a>角色与用户的区别</h1><ul>
+<li><strong>角色</strong> 相当于职位:经理,助理;</li>
+<li><strong>用户</strong> 相当于具体的人:刘老板,王老板;</li>
+</ul>
+<p><code>CREATE USER</code>为<code>CREATE ROLE</code>的别名.<code>CREATE USER</code>命令创建的用户默认带有login属性,而<code>CREATE ROLE</code>创建的用户不带有登录功能.需指定密码<code>CREATE USER exampleuser WITH PASSWORD &#39;password&#39;;</code>,即可用指定密码登录.</p>
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>有登陆权限:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> dbuser LOGIN <span class="keyword">PASSWORD</span> <span class="string">'password'</span>;</div></pre></td></tr></table></figure></p>
+<p>没有登录权限:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> dbuser;</div></pre></td></tr></table></figure></p>
+<h1 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h1><p>在database里面创建schema的权限:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> mydatabase <span class="keyword">TO</span> myuser;</div></pre></td></tr></table></figure>
+<p>在schema里面创建table的权限:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">SCHEMA</span> myschema <span class="keyword">TO</span> myuser;</div></pre></td></tr></table></figure>
+<p>授予用户使用schema的权限:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GRANT</span> <span class="keyword">USAGE</span> <span class="keyword">ON</span> <span class="keyword">SCHEMA</span> myschma <span class="keyword">TO</span> myuser;</div></pre></td></tr></table></figure>
+<p>授予用户操作schema中所有现有table的权限:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> ALL <span class="keyword">TABLES</span> <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> whichschema <span class="keyword">TO</span> whichuser;</div><div class="line"><span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> ALL SEQUENCES <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> whichschema <span class="keyword">TO</span> whichuser;</div></pre></td></tr></table></figure>
+<p>授予用户操作未来schema所有table权限:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">DEFAULT</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> MY_SCHEMA</div><div class="line">  <span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">TABLES</span> <span class="keyword">TO</span> MY_GROUP;</div><div class="line"></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">DEFAULT</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> MY_SCHEMA</div><div class="line">  <span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> SEQUENCES <span class="keyword">TO</span> MY_GROUP;</div></pre></td></tr></table></figure>
+<h2 id="将数据库所有schema中所有table权限赋予给用户"><a href="#将数据库所有schema中所有table权限赋予给用户" class="headerlink" title="将数据库所有schema中所有table权限赋予给用户"></a>将数据库所有schema中所有table权限赋予给用户</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DO</span> $<span class="keyword">do</span>$</div><div class="line"><span class="keyword">DECLARE</span></div><div class="line">    sch <span class="built_in">text</span>;</div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">    <span class="keyword">FOR</span> sch <span class="keyword">IN</span> <span class="keyword">SELECT</span> nspname <span class="keyword">FROM</span> pg_namespace</div><div class="line">    <span class="keyword">LOOP</span></div><div class="line">				<span class="keyword">EXECUTE</span> <span class="keyword">format</span>($$ <span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">SCHEMA</span> %I <span class="keyword">TO</span> myuser $$, sch);</div><div class="line">        <span class="keyword">EXECUTE</span> <span class="keyword">format</span>($$ <span class="keyword">GRANT</span> <span class="keyword">USAGE</span> <span class="keyword">ON</span> <span class="keyword">SCHEMA</span> %I <span class="keyword">TO</span> myuser $$, sch);</div><div class="line">				<span class="keyword">EXECUTE</span> <span class="keyword">format</span>($$ <span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> ALL <span class="keyword">TABLES</span> <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> %I <span class="keyword">TO</span> myuser $$, sch);</div><div class="line">				<span class="keyword">EXECUTE</span> <span class="keyword">format</span>($$ <span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> ALL SEQUENCES <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> %I <span class="keyword">TO</span> myuser $$, sch);</div><div class="line">				<span class="keyword">EXECUTE</span> <span class="keyword">format</span>($$ <span class="keyword">ALTER</span> <span class="keyword">DEFAULT</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> %I <span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">TABLES</span> <span class="keyword">TO</span> myuser $$, sch);</div><div class="line">				<span class="keyword">EXECUTE</span> <span class="keyword">format</span>($$ <span class="keyword">ALTER</span> <span class="keyword">DEFAULT</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">IN</span> <span class="keyword">SCHEMA</span> %I <span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> SEQUENCES <span class="keyword">TO</span> myuser $$, sch);</div><div class="line">    <span class="keyword">END</span> <span class="keyword">LOOP</span>;</div><div class="line"><span class="keyword">END</span>;</div><div class="line">$<span class="keyword">do</span>$;</div></pre></td></tr></table></figure>
+<h2 id="member-amp-amp-member-of"><a href="#member-amp-amp-member-of" class="headerlink" title="member &amp;&amp; member of"></a>member &amp;&amp; member of</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">GRANT</span> usera <span class="keyword">TO</span> userb;</div></pre></td></tr></table></figure>
+<p>userb拥有usera的权限,userb是usera的member.</p>
+<h2 id="转移owner"><a href="#转移owner" class="headerlink" title="转移owner"></a>转移owner</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DO</span> $$<span class="keyword">DECLARE</span> r <span class="built_in">record</span>;</div><div class="line"><span class="keyword">DECLARE</span></div><div class="line">    v_schema <span class="built_in">varchar</span> := <span class="string">'streetalk'</span>;</div><div class="line">    v_new_owner varchar := 'amap_admin';</div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">    <span class="keyword">FOR</span> r <span class="keyword">IN</span></div><div class="line">        <span class="keyword">select</span> <span class="string">'ALTER TABLE "'</span> || table_schema || <span class="string">'"."'</span> || table_name || <span class="string">'" OWNER TO '</span> || v_new_owner || <span class="string">';'</span> <span class="keyword">as</span> a <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema = v_schema</div><div class="line">        <span class="keyword">union</span> all</div><div class="line">        <span class="keyword">select</span> <span class="string">'ALTER TABLE "'</span> || sequence_schema || <span class="string">'"."'</span> || sequence_name || <span class="string">'" OWNER TO '</span> || v_new_owner || <span class="string">';'</span> <span class="keyword">as</span> a <span class="keyword">from</span> information_schema.sequences <span class="keyword">where</span> sequence_schema = v_schema</div><div class="line">        <span class="keyword">union</span> all</div><div class="line">        <span class="keyword">select</span> <span class="string">'ALTER TABLE "'</span> || table_schema || <span class="string">'"."'</span> || table_name || <span class="string">'" OWNER TO '</span> || v_new_owner || <span class="string">';'</span> <span class="keyword">as</span> a <span class="keyword">from</span> information_schema.views <span class="keyword">where</span> table_schema = v_schema</div><div class="line">        <span class="keyword">union</span> all</div><div class="line">        <span class="keyword">select</span> <span class="string">'ALTER FUNCTION "'</span>||nsp.nspname||<span class="string">'"."'</span>||p.proname||<span class="string">'"('</span>||pg_get_function_identity_arguments(p.oid)||<span class="string">') OWNER TO '</span> || v_new_owner || <span class="string">';'</span> <span class="keyword">as</span> a <span class="keyword">from</span> pg_proc p <span class="keyword">join</span> pg_namespace nsp <span class="keyword">ON</span> p.pronamespace = nsp.oid <span class="keyword">where</span> nsp.nspname = v_schema</div><div class="line">        <span class="keyword">union</span> all</div><div class="line">        <span class="keyword">select</span> <span class="string">'ALTER SCHEMA "'</span> || v_schema || <span class="string">'" OWNER TO '</span> || v_new_owner</div><div class="line">        <span class="keyword">union</span> all</div><div class="line">        <span class="keyword">select</span> <span class="string">'ALTER DATABASE "'</span> || current_database() || <span class="string">'" OWNER TO '</span> || v_new_owner</div><div class="line">    <span class="keyword">LOOP</span></div><div class="line">        <span class="keyword">EXECUTE</span> r.a;</div><div class="line">    <span class="keyword">END</span> <span class="keyword">LOOP</span>;</div><div class="line"><span class="keyword">END</span>$$;</div></pre></td></tr></table></figure>
+
+<!-- Tags -->
+
+
+
+<div class="tags">
+    <a href="/tags/work/" class="button small">work</a>
+</div>
+
+
+
+<!-- Comments -->
+<div>
+    
+    <hr />
+    <h3>Kommentare:</h3>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+
+</div>
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <section>
+            <h2>About</h2>
+            <div>
+                一个无聊的人<br/> 但是生活得有意思
+            </div>
+        </section>
+        <section>
+            <h2>Follow</h2>
+            <ul class="icons">
+                
+                    <li><a href="https://twitter.com/?lang=en" class="icon style2 fa-twitter" target="_blank" ><span class="label">Twitter</span></a></li>
+                
+                
+                    <li><a href="https://500px.com/" class="icon style2 fa-pencil-square" target="_blank" ><span class="label">zhihu</span></a></li>
+                
+                
+                    <li><a href="https://www.facebook.com/" class="icon style2 fa-facebook" target="_blank" ><span class="label">Facebook</span></a></li>
+                
+                
+                    <li><a href="https://www.instagram.com/" class="icon style2 fa-instagram" target="_blank" ><span class="label">Instagram</span></a></li>
+                
+                
+                
+                    <li><a href="https://github.com/klugjo/hexo-theme-phantom/commits?author=klugjo" class="icon style2 fa-github-square" target="_blank" ><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                
+                    <li><a href="\#" class="icon style2 fa-envelope-o" target="_blank" ><span class="label">Email</span></a></li>
+                
+                
+                    <li><a href="\#" class="icon style2 fa-rss" target="_blank" ><span class="label">RSS</span></a></li>
+                
+            </ul>
+        </section>
+        <ul class="copyright">
+            <li>&copy; Untitled. All rights reserved</li>
+            <li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a></li>
+            <li>Hexo: <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></li>
+        </ul>
+    </div>
+</footer>
+    </div>
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- skel -->
+<script src="/js/skel.min.js"></script>
+
+<!-- Custom Code -->
+<script src="/js/util.js"></script>
+
+<!--[if lte IE 8]>
+<script src="/js/ie/respond.min.js"></script>
+<![endif]-->
+
+<!-- Custom Code -->
+<script src="/js/main.js"></script>
+
+<!-- Gallery -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'leehighxd';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+</body>
+
+</html>

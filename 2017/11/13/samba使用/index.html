@@ -18,6 +18,8 @@
 
     <!--Open Graph Title-->
     
+        <meta property="og:title" content="samba使用"/>
+    
 
     <!--Open Graph Site Name-->
     <meta property="og:site_name" content="Pulp Fiction"/>
@@ -29,7 +31,7 @@
 
     <!-- Title -->
     
-    <title>Archiv - Pulp Fiction</title>
+    <title>samba使用 - Pulp Fiction</title>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/sass/main.css">
@@ -102,28 +104,45 @@
                 <!-- Main Content -->
                 
 
-<section class="archives">
+    <h1>samba使用</h1>
+
+
+    <span class="image main"><img src="/assets/disuxiaoshuo.png" alt="" /></span>
+
+
+<!-- Gallery -->
+
+
+<!-- Content -->
+<ol>
+<li>安装插件<code>sudo apt-get install cifs-utils</code></li>
+<li><code>sudo mount.cifs //citorynas/nas(nas文件夹) /nas(挂载点) -o username=citorytech</code></li>
+</ol>
+<p>sudo mount.cifs //citorynas/nas/share /home/zhangfan/data/data_nas_public -o username=citorytech<br>sudo mount.cifs //citorynas/nas/user/zhangfan /home/zhangfan/data/data_nas_private -o username=citorytech</p>
+
+
+<!-- Tags -->
+
+
+
+<div class="tags">
     
-    <ul class="archive-list">
-        
-            <li>
-    <a href="/2017/10/31/PostgreSQL用户管理/">PostgreSQL用户管理</a>
-</li>
+</div>
 
-        
-            <li>
-    <a href="/2017/10/31/new-start/">New Start</a>
-</li>
 
-        
-            <li>
-    <a href="/2017/11/13/samba使用/">samba使用</a>
-</li>
 
-        
-    </ul>
-</section><!-- end main -->
+<!-- Comments -->
+<div>
+    
+    <hr />
+    <h3>Kommentare:</h3>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
 
+
+
+</div>
 
 
 
@@ -208,7 +227,7 @@
         var dsq = document.createElement('script');
         dsq.type = 'text/javascript';
         dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
